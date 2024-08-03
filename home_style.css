@@ -1,0 +1,137 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.main {
+    width: 360px;
+    margin: 2rem auto;
+    height: 700px;
+    box-shadow: 3px 3px 10px rgb(0, 0, 0, 0.2);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.logo {
+    height: 240px;
+    background: white;
+}
+
+.logo img{
+    width: 100%;
+    justify-items: center;
+    align-items: center;
+}
+
+.home_content {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50px auto;
+    color: #183cb5;
+    margin: 5px;
+    padding: 5px;
+    gap: 5px;
+}
+
+.home_content button {
+    padding: 6px 15px;
+    font-size: 14;
+    cursor: pointer;
+    border: 0px;
+    background: transparent;
+    position: relative;
+    margin: 20px;
+    transition: all 0.5s ease;
+}
+
+.ctcTicket_btn {
+    color: white;
+    overflow: hidden;
+    border-radius: 30px;
+    box-shadow: 0px -0px 0px 0px rgba(143, 64, 248, 0.5), 0px 0px 0px 0px rgba(39, 200, 255, 0.5);
+}
+
+.ctcTicket_btn:hover {
+    transform: translate(0, -6px);
+    box-shadow: 0px -10px 25px 0px rgba(143, 64, 248, 0.5), -10px 10px 25px 0px rgba(39, 200, 255, 0.5);
+}
+
+.ctcTicket_btn:hover::after {
+    transform: rotate(150deg);
+}
+
+.ctcTicket_btn::after {
+    content: "";
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    top: -50px;
+    left: -100px;
+    background-color: #ff3cac;
+    background-image: linear-gradient(225deg, #27d86c 0%, #26caf8 50%, #c625d0 100%);
+    z-index: -1;
+    transition: all 0.25s ease;
+}
+
+.grid-items1 {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+    text-align: center;
+}
+
+.grid-items2 {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    transition: 0.3s;
+    align-items: center;
+}
+
+.grid-items2:hover {
+    outline: 1px solid orange;
+}
+
+.grid-items3 {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    transition: 0.3s;
+    align-self: center;
+}
+
+.grid-items3:hover {
+    outline: 1px solid orange;
+}
+
+.home_content img {
+    width: 90%;
+    height: 90%;
+    object-fit: cover;
+    align-items: center;
+}
+
+.footter {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+    padding: 10px;
+    color: gray;
+}
+
+.foot-item1 {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    font-size: 14px;
+    text-align: center;
+}
+
+.foot-item2 {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    font-size: 10px;
+    text-align: right;
+}
