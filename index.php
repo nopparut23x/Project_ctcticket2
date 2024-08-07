@@ -38,7 +38,7 @@
                 <div class="container d-flex justify-content-center align-items-center">
                     <div class="row">
                         <div class="col-6 text-center">
-                            <img src="img/ctc_ticket.png" alt="">
+                            <img src="assets/image/banner_home.jpg" alt="">
                             <div class="container">
                                 <div class="row">
                                     <a href="table/ctcticket_home.php" class="btn btn-outline-primary mt-1 btn-custom"> จองบัตร</a>
