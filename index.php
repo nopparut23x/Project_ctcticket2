@@ -2,135 +2,65 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/bootstrap.css">
-  <title>CTC Ticket</title>
-  <style>
-    .header-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      margin-bottom: 40px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTC 86 Years</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .btn-custom {
+            margin: 0 auto;
+            width: auto;
+            padding: 0.5rem 1rem;
+            white-space: nowrap;
+        }
 
-    .header-container img {
-      width: 100px;
-      margin-right: 20px;
-    }
-
-    .header-container h3,
-    .header-container p {
-      margin: 0;
-    }
-
-    .content-container {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .content-container .item {
-      width: 100%;
-      max-width: 450px;
-      text-align: center;
-      margin: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-      box-sizing: border-box;
-    }
-
-    .content-container img {
-      width: 100%;
-      height: auto;
-      max-height: 250px;
-      margin-bottom: 15px;
-    }
-
-    .btn-custom {
-      font-size: 1.5rem;
-      padding: 10px 20px;
-      border-radius: 50px;
-      display: inline-block;
-      width: 100%;
-      max-width: 250px;
-      text-align: center;
-      line-height: 1.5;
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 40px;
-      padding: 20px;
-      background-color: #f9f9f9;
-    }
-
-    @media (max-width: 768px) {
-      .content-container {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-
-    @media (max-width: 576px) {
-      .header-container img {
-        width: 80px;
-      }
-
-      .btn-custom {
-        font-size: 1.2rem;
-        padding: 8px 16px;
-        max-width: 200px;
-      }
-
-      .footer {
-        padding: 10px;
-      }
-    }
-  </style>
+        .message-ctc p {
+            color: #184488;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
-  <div class="container header-container mt-5">
-    <img src="img/logo1.png" alt="Logo">
-    <div>
-      <h3>ครบรอบ 86 ปี วิทยาลัยเทคนิคชัยภูมิ</h3>
-      <p>The 86 years Anniversary Chaiyaphum</p>
-      <p>Technical College</p>
+    <div class="banner">
+        <div class="container-md d-flex justify-content-center align-items-center">
+            <img src="assets/image/ctc_banner.jpg" alt="">
+        </div>
     </div>
-  </div>
-
-  <div class="container content-container">
-    <div class="item">
-      <img src="img/ctc_ticket.png" alt="CTC Ticket">
-      <a href="ctcticket_home.php" class="btn btn-primary btn-custom">
-        จองบัตร
-      </a>
+    <br>
+    <div class="content m-5">
+        <div class="container-md d-block justify-content-center align-items-center">
+            <div class="message-ctc">
+                <p>ระบบจองบัตรและเสื้อที่ระลึก</p>
+                <p>86 ปี วิทยาลัยเทคนิคชัยภูมิ คืนสู่เหย้า รั้ว น้ำเงิน-ขาว</p>
+            </div>
+            <div class="items-ticket">
+                <div class="container d-flex justify-content-center align-items-center">
+                    <div class="row">
+                        <div class="col-6 text-center">
+                            <img src="img/ctc_ticket.png" alt="">
+                            <div class="container">
+                                <div class="row">
+                                    <a href="table/ctcticket_home.php" class="btn btn-outline-primary mt-1 btn-custom"> จองบัตร</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 text-center">
+                            <img src="assets/image/ctc_shirt.png" alt="">
+                            <div class="container">
+                                <div class="row">
+                                    <a href="shirt/ctcshirt_home.php" class="btn btn-outline-primary mt-1 btn-custom">สั่งเสื้อ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="item">
-      <img src="assets/shirt68year.png" alt="Shirt">
-      <a href="ctcshirt_home.php" class="btn btn-primary btn-custom">
-        ซื้อเสื้อ
-      </a>
-    </div>
-  </div>
-
-  <div class="footer">
-    <hr>
-    <h6>
-      วิทยาลัยเทคนิคชัยภูมิ<br>
-      ติดต่อ xxx-xxxxxxx
-    </h6>
-    <p class="small mt-2">พัฒนาโดยแผนกวิชาเทคโนโลยีสารสนเทศ</p>
-  </div>
-
+    <?php
+    include 'footer_ctc.html';
+    ?>
 </body>
 
 </html>

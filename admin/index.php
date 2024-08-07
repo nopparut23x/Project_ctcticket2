@@ -1,2 +1,2 @@
 <?php
-header("location:manager.php");
+header("location:manager_table.php");

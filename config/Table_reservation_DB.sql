@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Aug 01, 2024 at 08:14 AM
+-- Generation Time: Aug 07, 2024 at 04:12 AM
 -- Server version: 5.7.39
 -- PHP Version: 7.4.33
 
@@ -34,22 +34,45 @@ CREATE TABLE `details` (
   `price` varchar(255) NOT NULL,
   `status_pay` enum('0','1','2') NOT NULL,
   `file` varchar(255) NOT NULL,
+  `data_type` enum('shirt','table') NOT NULL,
   `time_reservation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reservation_items`
+-- Table structure for table `order_shirt_items`
 --
 
-CREATE TABLE `reservation_items` (
+CREATE TABLE `order_shirt_items` (
+  `order_id` int(11) NOT NULL,
+  `details_id` int(11) NOT NULL,
+  `size` varchar(255) NOT NULL,
+  `amount` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_table_items`
+--
+
+CREATE TABLE `order_table_items` (
   `reservation_item_id` int(11) NOT NULL,
   `details_id` int(11) NOT NULL,
-  `Numberphone_id` int(11) NOT NULL,
   `table_id` int(11) NOT NULL,
   `time_re` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `order_table_items`
+--
+
+INSERT INTO `order_table_items` (`reservation_item_id`, `details_id`, `table_id`, `time_re`) VALUES
+(37, 22, 66, '2024-08-01 08:21:14'),
+(38, 22, 67, '2024-08-01 08:21:14'),
+(39, 22, 69, '2024-08-01 08:21:14'),
+(40, 22, 70, '2024-08-01 08:21:14');
 
 -- --------------------------------------------------------
 
@@ -69,17 +92,17 @@ CREATE TABLE `table_re` (
 --
 
 INSERT INTO `table_re` (`table_id`, `zone_id`, `table_number`, `table_status`) VALUES
-(66, 3, '1', '0'),
-(67, 3, '2', '0'),
-(68, 3, '3', '0'),
-(69, 3, '4', '0'),
-(70, 3, '5', '0'),
-(71, 3, '6', '0'),
-(72, 3, '7', '0'),
-(73, 3, '8', '0'),
+(66, 3, '1', '1'),
+(67, 3, '2', '1'),
+(68, 3, '3', '1'),
+(69, 3, '4', '1'),
+(70, 3, '5', '1'),
+(71, 3, '6', '1'),
+(72, 3, '7', '1'),
+(73, 3, '8', '1'),
 (74, 3, '9', '0'),
-(75, 3, '10', '0'),
-(76, 3, '11', '0'),
+(75, 3, '10', '1'),
+(76, 3, '11', '1'),
 (77, 3, '12', '0'),
 (78, 3, '13', '0'),
 (79, 3, '14', '0'),
@@ -283,9 +306,15 @@ ALTER TABLE `details`
   ADD PRIMARY KEY (`details_id`);
 
 --
--- Indexes for table `reservation_items`
+-- Indexes for table `order_shirt_items`
 --
-ALTER TABLE `reservation_items`
+ALTER TABLE `order_shirt_items`
+  ADD PRIMARY KEY (`order_id`);
+
+--
+-- Indexes for table `order_table_items`
+--
+ALTER TABLE `order_table_items`
   ADD PRIMARY KEY (`reservation_item_id`);
 
 --
@@ -308,13 +337,19 @@ ALTER TABLE `zone_table`
 -- AUTO_INCREMENT for table `details`
 --
 ALTER TABLE `details`
-  MODIFY `details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
--- AUTO_INCREMENT for table `reservation_items`
+-- AUTO_INCREMENT for table `order_shirt_items`
 --
-ALTER TABLE `reservation_items`
-  MODIFY `reservation_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+ALTER TABLE `order_shirt_items`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `order_table_items`
+--
+ALTER TABLE `order_table_items`
+  MODIFY `reservation_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `table_re`
