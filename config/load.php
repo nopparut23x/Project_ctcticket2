@@ -10,3 +10,4 @@ function redirect($location)
 {
     echo "<script>window.location='$location'</script>";
 }
+

@@ -4,7 +4,7 @@ require_once 'header.php';
 // Fetch existing zones
 $zones = $db->select('zone_table');
 
-// Handle form submissions for adding tables and zones
+// Handle form submissions for adding tables, zones, and updating status
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['add_table'])) {
         $table_number_start = $_POST['table_number'];
@@ -43,6 +43,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $where = array('zone_id' => $zone_id);
         $db->delete('table_re', $where);
         alert('ลบโต๊ะทั้งหมดในโซนสำเร็จ');
+        redirect("add_table.php");
+    } elseif (isset($_POST['update_status'])) {
+        $table_id = $_POST['table_id'];
+        $new_status = $_POST['new_status'];
+        $fields = array('table_status' => $new_status);
+        $where = array('table_id' => $table_id);
+        $db->update('table_re', $fields, $where);
+        alert('อัปเดตสถานะโต๊ะสำเร็จ');
         redirect("add_table.php");
     }
 }
@@ -126,7 +134,15 @@ if ($tables === false) {
                                     }
                                 }
                                 ?></td>
-                            <td><?php echo $table['table_status'] == 0 ? 'ว่าง' : 'ไม่ว่าง'; ?></td>
+                            <td>
+                                <form method="POST" style="display:inline;">
+                                    <input type="hidden" name="table_id" value="<?php echo $table['table_id']; ?>">
+                                    <input type="hidden" name="new_status" value="<?php echo $table['table_status'] == 0 ? 1 : 0; ?>">
+                                    <button onclick="return confirm('ต้องการเปลี่ยนสถานะโต๊ะเป็น <?php echo $table['table_status'] == 0 ? 'ไม่ว่าง' : 'ว่าง'; ?>ใช่หรือไม่')" type="submit" name="update_status" class="btn btn-<?php echo $table['table_status'] == 0 ? 'success' : 'warning'; ?>">
+                                        <?php echo $table['table_status'] == 0 ? 'ว่าง' : 'ไม่ว่าง'; ?>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     <?php } ?>
                 </tbody>
@@ -142,7 +158,9 @@ if ($tables === false) {
             </form>
         <?php } ?>
     </div>
+    <?php
+    include '../footer_ctc.html';
+    ?>
 </body>
 
 </html>
-<script src="js/bootstrap.min.js"></script>

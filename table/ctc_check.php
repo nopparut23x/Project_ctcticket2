@@ -72,11 +72,12 @@ if (isset($_GET['action'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CTC Ticket</title>
+  <title>CTC 86 Years</title>
   <link rel="stylesheet" href="../css/bootstrap.css">
 </head>
 
 <body>
+
   <p class="mt-4 ms-4">โปรดตรวจสอบข้อมูลก่อนยืนยันการชำระเงิน</p>
   <div class="container">
     <div class="card">
@@ -97,12 +98,13 @@ if (isset($_GET['action'])) {
         </div>
         <center>
           <div class="mt-5 ">
-            <a class="btn btn-primary my-1 " href="ctc_check_Order.php?action=confirm&id=<?php echo $row['details_id'] ?>">
-              <h6>ยืนยันการจองที่นั่ง</h6>
-            </a>
-            <a class="btn btn-primary my-1" href="?action=delete&id=<?php echo $row['details_id'] ?>">
+            <a onclick="return confirm('ยืนยันการยกเลิกการจอง?')" class="btn btn-danger my-1" href="?action=delete&id=<?php echo $row['details_id'] ?>">
               <h6>ยกเลิกการจองที่นั่ง</h6>
             </a>
+            <a class="btn btn-success my-1 " href="ctc_check_Order.php?action=confirm&id=<?php echo $row['details_id'] ?>">
+              <h6>ดำเนินการต่อ</h6>
+            </a>
+
           </div>
         </center>
       </div>

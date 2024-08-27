@@ -36,15 +36,13 @@ if (!empty($select)) {
 }
 ?>
 
-<!-- HTML ส่วนที่แสดงผล -->
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CTC Shirt Order</title>
+    <title>CTC 86 Years</title>
     <link rel="stylesheet" href="../css/bootstrap.css">
 </head>
 
@@ -68,7 +66,7 @@ if (!empty($select)) {
     <?php if (!empty($order_data)) : ?>
         <?php foreach ($order_data as $data) :
             if ($data['data_type'] == 'shirt') : ?>
-                <div class="container">
+                <div class="container mt-5">
                     <div class="card">
                         <div class="card-body">
                             <!-- เวลาการจองที่มุมซ้ายบนของ card -->
@@ -91,7 +89,7 @@ if (!empty($select)) {
                                         echo '<h4 class="bg-secondary text-center rounded-pill p-2">ยังไม่ได้ชำระเงิน</h4>';
                                     } elseif ($data['status_pay'] == 1) {
                                         echo '<h4 class="bg-warning text-center rounded-pill p-2">รอตรวจสอบ</h4>';
-                                        echo "<a class='' href='../" . $data['file'] . "'>หลักฐานการชำระเงิน</a>";
+                                        echo '<button class="btn btn-link" onclick="showEvidenceModal(\'' . '../' . $data['file'] . '\')">หลักฐานการชำระเงิน</button>';
                                     } elseif ($data['status_pay'] == 2) {
                                         echo '<h4 class="bg-success text-center rounded-pill p-2">ชำระเงินสำเร็จ</h4>';
                                         // ปุ่มดาวน์โหลดรายละเอียด
@@ -122,9 +120,34 @@ if (!empty($select)) {
         endforeach; ?>
     <?php endif; ?>
 
+    <div class="modal fade" id="paymentEvidenceModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">หลักฐานการชำระเงิน</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <center>
+                        <img id="paymentEvidenceImage" src="" alt="หลักฐานการชำระเงิน" class="img-fluid">
+                    </center>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <?php
     include '../footer_ctc.html';
     ?>
+    <script>
+        function showEvidenceModal(imageSrc) {
+            document.getElementById('paymentEvidenceImage').src = imageSrc;
+            var modal = new bootstrap.Modal(document.getElementById('paymentEvidenceModal'));
+            modal.show();
+        }
+    </script>
 </body>
 
 </html>

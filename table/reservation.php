@@ -1,10 +1,34 @@
 <?php
 require_once 'header.php';
+
+// Check if 'id' is set in the query string
 if (empty($_GET['id'])) {
-    header("Location:ctcticket_home.php");
+    // Redirect to a default page or display an error
+    header("Location: ctcticket_home.php");
+    exit(); // Ensure no further code is executed
 }
-$where = ['zone_id' => $_GET['id']];
-$select = $db->selectwhere('table_re', $where);
+
+// Get the 'id' from the query string
+$zoneId = $_GET['id'];
+$where_zone = array(
+    'zone_id' => $zoneId
+);
+$zondeselect = $db->selectwhere('zone_table', $where_zone);
+foreach ($zondeselect as $row_zone);
+// Define the filter condition based on the selected option
+$filter = isset($_GET['filter']) ? $_GET['filter'] : 'all';
+$filterCondition = ($filter === 'available') ? ['table_status' => 0] : [];
+if ($filter === 'available') {
+    $where = [
+        'zone_id' => $zoneId,
+        'table_status' => 0,
+    ];
+} else {
+    $where = ['zone_id' => $zoneId];
+}
+// Fetch tables based on the filter condition
+$select = $db->selectwhere('table_re', $where, $filterCondition);
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['check'])) {
     $totalItems = count($_POST['check']);
@@ -21,6 +45,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['check'])) {
     $insertId = $db->db->insert_id;
 
     foreach ($_POST['check'] as $value) {
+        $fields_check = array(
+            'table_id' => $value,
+            'table_status' => 1
+        );
+        $chack = $db->selectwhere('table_re', $fields_check);
+        if ($chack) {
+            alert('ไม่สามารถทำรายการได้!! เนื่องจากมีบุคคลจองโต๊ะที่ท่านเลือกก่อนขณะที่ท่านทำรายการ');
+            redirect("reservation.php?id=" . $zoneId);
+            exit();
+        }
         $fields = array(
             'details_id' => $insertId,
             'table_id' => $value
@@ -45,7 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['check'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CTC Ticket</title>
+    <title>CTC 86 Years</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <script>
         function validateSelection() {
@@ -62,12 +96,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['check'])) {
 </head>
 
 <body>
-    <img src="../assets/seat.jpg" style="width:90%; height:auto;" class="col-md">
+    <img src="../assets/image/A<?php echo $_GET['id'] ?>.png" style="width:90%; height:auto;" class="col-md">
+    <center>
+
+        <h1 class='mt-5'>โซน <?php echo $row_zone['zone_name']  ?></h1>
+    </center>
+    <!-- Filter Dropdown -->
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <form method="GET" action="">
+                    <!-- Hidden input to preserve 'id' -->
+                    <input type="hidden" name="id" value="<?php echo htmlspecialchars($zoneId); ?>">
+
+                    <div class="form-group">
+                        <label for="filter" class="form-label">กรุณาเลือกการกรองโต๊ะ:</label>
+                        <select id="filter" name="filter" class="form-select" onchange="this.form.submit()">
+                            <option value="all" <?php echo $filter === 'all' ? 'selected' : ''; ?>>ทั้งหมด</option>
+                            <option value="available" <?php echo $filter === 'available' ? 'selected' : ''; ?>>โต๊ะที่ว่าง</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <form method="POST" enctype="multipart/form-data" id="reservationForm" onsubmit="return validateSelection();">
-
         <div class="container mt-5">
-
             <div class="row">
                 <?php foreach ($select as $row_table) { ?>
                     <div class="col-md-4">
@@ -122,9 +177,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['check'])) {
         </div>
 
     </form>
-    <?php
-    include '../footer_ctc.html';
-    ?>
+    <?php include '../footer_ctc.html'; ?>
     <script src="../js/bootstrap.bundle.js"></script>
 </body>
 

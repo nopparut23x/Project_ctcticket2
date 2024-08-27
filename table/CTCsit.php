@@ -3,81 +3,83 @@ require_once 'header.php';
 $select = $db->select('zone_table');
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Zone</title>
+  <link rel="stylesheet" href="../css/bootstrap.css">
   <style>
-    .dropbtn {
-      background-color: #4CAF50;
-      color: white;
-      padding: 16px;
-      font-size: 16px;
-      border: none;
+    .zone-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      margin: 10px;
+      transition: box-shadow 0.3s;
       cursor: pointer;
+      text-align: center;
     }
 
-
-    .dropdown {
-      position: relative;
-      display: inline-block;
+    .zone-card:hover {
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
     }
 
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
-      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-      z-index: 1;
+    .zone-card h5 {
+      margin: 0;
+      font-size: 18px;
+      color: #333;
     }
 
-    /* ตัวอักษร link  */
-    .dropdown-content a {
-      color: black;
-      padding: 12px 16px;
-      text-decoration: none;
-      display: block;
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
     }
 
-    /* สี dropdown โซน */
-    .dropdown-content a:hover {
-      background-color: #f1f1f1
+    .image-container {
+      margin: 20px 0;
     }
 
-    /* dropdownmenu */
-    .dropdown:hover .dropdown-content {
-      display: block;
+    .image-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
     }
 
-    /* สีดรอปดาว dropdown */
-    .dropdown:hover .dropbtn {
-      background-color: #3e8e41;
+    .text-center {
+      text-align: center;
     }
   </style>
 </head>
 
 <body>
+  <div class="container">
+    <p class="mt-3 text-center">โปรดเลือกโซนที่นั่งที่ท่านต้องการโดยคลิกที่บัตรโซนที่ท่านต้องการเพื่อทำรายการจอง</p>
 
-  <p class="mt-3 ms-5">โปรดเลือกโซนที่นั่งที่ท่านต้องการด้วยการคลิกที่บริเวณโซนที่ท่านต้องการเพื่อทำรายการจอง</p>
-  <center>
-    <img src="../assets/seat.jpg" style="width:90%; hieght:auto; " class="col-md">
-  </center>
-  <center>
-    <div class="dropdown m-5">
-      <button class="dropbtn ms-5 rounded-4 ">เลือกโซน</button>
-      <div class="dropdown-content ms-5 " style="position:sticky ">
-        <?php
-        foreach ($select as $row_zone) {
-        ?>
-          <a href="reservation.php?id=<?php echo $row_zone['zone_id'] ?>" role="button"> โซน <?php echo $row_zone['zone_name'] ?></a>
-        <?php } ?>
+    <div class="image-container">
+      <img src="../assets/seat.jpg" alt="Seating Plan">
+    </div>
+
+    <div class="text-center">
+      <div class="row">
+        <?php foreach ($select as $row_zone) : ?>
+          <div class="col-md-4">
+            <a href="reservation.php?id=<?php echo $row_zone['zone_id'] ?>" class="text-decoration-none">
+              <div class="zone-card">
+                <h5>โซน <?php echo $row_zone['zone_name'] ?></h5>
+              </div>
+            </a>
+          </div>
+        <?php endforeach; ?>
       </div>
     </div>
-  </center>
+  </div>
 
-  <?php
-  include '../footer_ctc.html';
-  ?>
+  <?php include '../footer_ctc.html'; ?>
+
+  <script src="js/bootstrap.bundle.js"></script>
 </body>
-<script src="js/bootstrap.bundle.js"></script>
 
 </html>

@@ -42,7 +42,7 @@ if (isset($_POST['save'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CTC Ticket</title>
+  <title>CTC 86 Years</title>
   <link rel="stylesheet" href="../css/bootstrap.css">
 </head>
 
@@ -53,18 +53,23 @@ if (isset($_POST['save'])) {
       <div class="card-body">
         <div class="d-inline-flex">
           <div class="mt-2 ms-1">
-            <p>หมายเลขการสั่งซื้อ : 00<?php echo $row['details_id'] ?></p>
-            <p>ชื่อผู้จอง : <?php echo $row['full_name'] ?></p>
+            <p><b>หมายเลขการสั่งซื้อ</b> : 00<?php echo $row['details_id'] ?></p>
+            <p><b>ชื่อผู้จอง</b> : <?php echo $row['full_name'] ?></p>
 
-            <p>เสื้อ size : <?php echo implode(' , ', $shirtInfo) ?>
+            <p><b>เสื้อ size</b> : <?php echo implode(' , ', $shirtInfo) ?>
             </p>
-            <p>ราคารวม : <?php echo $row['price'] . ' บาท ' ?></p>
+            <p><b>ราคารวม</b> : <?php echo $row['price'] . ' บาท ' ?></p>
           </div>
           <div class="mt-5 ms-1">
-            <p>เบอร์โทร : <?php echo $row['number_phone'] ?></p>
+            <p><b>เบอร์โทร</b> : <?php echo $row['number_phone'] ?></p>
           </div>
         </div>
         <center>
+          <img src="../assets/image/logo_ktb1.webp" width="50px" height="50px">
+          <h5 class="mt-3"><b>ธนาคารกรุงไทย</b> </h5>
+          <p><b>เลขที่บัญชี</b>: 986-4-09952-3</p>
+          <p><b>ชื่อบัญชี</b> : เงินสวัสดิการนักเรียน นักศึกษาวิทยาลัยเทคนิคชัยภูมิ</p>
+          <br>
           <div class="mt-5 col-md-2 ">
             <h4 class="bg-warning text-center rounded-pill p-2">รอตรวจสอบ</h4>
           </div>

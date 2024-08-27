@@ -29,7 +29,7 @@ foreach ($shirt_select as $row_shirt) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CTC Ticket</title>
+    <title>CTC 86 Years</title>
     <link rel="stylesheet" href="../css/bootstrap.css">
     <style>
         @media print {
@@ -63,22 +63,23 @@ foreach ($shirt_select as $row_shirt) {
 </head>
 
 <body>
-    <p class="mt-4 ms-4">โปรดตรวจสอบข้อมูลก่อนยืนยันการชำระเงิน</p>
     <div class="container">
+        <p class="mt-5 ms-4">โปรดตรวจสอบข้อมูลให้ครบถ้วน</p>
+
         <div class="card">
             <div class="card-body">
                 <p class="text-muted small"><?php echo $row['time_reservation']; ?></p>
                 <div class="d-inline-flex">
                     <div class="mt-2 ms-1">
-                        <p>หมายเลขการสั่งซื้อ : 00<?php echo $row['details_id'] ?></p>
-                        <p>ชื่อผู้จอง : <?php echo $row['full_name'] ?></p>
+                        <p><b>หมายเลขการสั่งซื้อ</b> : 00<?php echo $row['details_id'] ?></p>
+                        <p><b>ชื่อผู้จอง</b> : <?php echo $row['full_name'] ?></p>
 
-                        <p>เสื้อ size : <?php echo implode(' , ', $shirtInfo) ?>
+                        <p><b>เสื้อ size</b> : <?php echo implode(' , ', $shirtInfo) ?>
                         </p>
-                        <p>ราคารวม : <?php echo $row['price'] . ' บาท ' ?></p>
+                        <p><b>ราคารวม</b> : <?php echo $row['price'] . ' บาท ' ?></p>
                     </div>
-                    <div class="mt-5 ms-1">
-                        <p>เบอร์โทร : <?php echo $row['number_phone'] ?></p>
+                    <div class="mt-2 ms-4">
+                        <p><b>เบอร์โทร</b> : <?php echo $row['number_phone'] ?></p>
                     </div>
                 </div>
                 <div class="float-end me-4">

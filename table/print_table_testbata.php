@@ -23,10 +23,7 @@ foreach ($reservation_select as $row_reservation) {
         $table[] = $row_table['table_number'];
     }
 }
-
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,12 +47,45 @@ foreach ($reservation_select as $row_reservation) {
                 content: "";
             }
 
+            /* Hide elements during print */
             #downloadButton {
                 display: none;
                 /* Hide the button during print */
             }
 
+            .text_number,
+            .text_table {
+                display: none;
+                /* Hide these elements during print */
+            }
+        }
 
+        img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            position: relative;
+            z-index: 1;
+        }
+
+        .text_number {
+            margin-top: 10px;
+            margin-left: 200px;
+            color: #184175;
+            font-weight: bold;
+            font-size: 24px;
+            z-index: 999;
+            position: absolute;
+        }
+
+        .text_table {
+            color: #184175;
+            font-weight: bold;
+            font-size: 24px;
+            z-index: 999;
+            position: absolute;
+            margin-left: 1011px;
+            margin-top: -59px;
         }
     </style>
     <script>
@@ -67,27 +97,26 @@ foreach ($reservation_select as $row_reservation) {
 </head>
 
 <body>
+    <p class="mt-4 ms-4">โปรดตรวจสอบข้อมูลก่อนยืนยันการชำระเงิน</p>
     <div class="container">
-        <p class="mt-5 ms-4">โปรดตรวจสอบข้อมูลให้ครบถ้วน</p>
         <div class="card">
             <div class="card-body">
                 <div class="d-inline-flex">
                     <div class="mt-2 ms-1">
-                        <p class="text-muted small"><?php echo $row['time_reservation']; ?></p>
+                        <div class="text_number">
+                            <?php echo htmlspecialchars($row['details_id']); ?>
+                        </div>
+                        <img src="../assets/image/bill.png" class="img-fluid">
 
-                        <p><b>หมายเลขบัตร</b> : 00<?php echo $row['details_id'] ?></p>
-                        <p><b>ชื่อผู้จอง</b> : <?php echo $row['full_name'] ?></p>
-                        <p><b>โต๊ะ</b> : <?php echo implode(' , ', $table) ?></p>
-                        <p><b>ค่าจองบัตร</b> : <?php echo $row['price'] ?></p>
-                    </div>
-
-                    <div class="mt-4 ms-4">
+                        <div class="text_table">
+                            <p> <?php echo htmlspecialchars(implode(' , ', $table)); ?></p>
+                        </div>
                         <br>
-                        <p><b>เบอร์โทร</b> : <?php echo $row['number_phone'] ?></p>
-                        <p><b>โซน</b> : <?php echo $zone ?></p>
+
+                        <p>โซน : <?php echo htmlspecialchars($zone); ?></p>
                     </div>
                 </div>
-                <div class="float-end me-4">
+                <div class="float-end">
                     <button id="downloadButton" onclick="printAndHide()" type="button" class="btn btn-primary">
                         <h6>ดาวน์โหลด</h6>
                     </button>
@@ -95,9 +124,7 @@ foreach ($reservation_select as $row_reservation) {
             </div>
         </div>
     </div>
-    <?php
-    include '../footer_ctc.html';
-    ?>
+    <?php include '../footer_ctc.html'; ?>
 </body>
 
 </html>

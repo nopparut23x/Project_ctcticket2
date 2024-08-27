@@ -56,7 +56,7 @@ if (isset($_POST['save'])) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CTC Ticket</title>
+  <title>CTC 86 Years</title>
   <link rel="stylesheet" href="../css/bootstrap.css">
 </head>
 
@@ -67,22 +67,30 @@ if (isset($_POST['save'])) {
       <div class="card-body">
         <div class="d-inline-flex">
           <div class="mt-2 ms-1">
-            <p>หมายเลขการจองบัตร : 00<?php echo $row['details_id'] ?></p>
-            <p>ชื่อผู้จอง : <?php echo $row['full_name'] ?></p>
+            <p><b>หมายเลขการจองบัตร</b> : 00<?php echo $row['details_id'] ?></p>
+            <p><b>ชื่อผู้จอง</b> : <?php echo $row['full_name'] ?></p>
 
-            <p>โต๊ะ :<?php echo implode(' , ', $table) ?>
+            <p><b>โต๊ะ</b> :<?php echo implode(' , ', $table) ?>
             </p>
-            <p>ค่าจองบัตร : <?php echo $row['price'] ?></p>
+            <p><b>ค่าจองบัตร</b> : <?php echo $row['price'] ?></p>
           </div>
           <div class="mt-5 ms-1">
-            <p>เบอร์โทร : <?php echo $row['number_phone'] ?></p>
-            <p>โซน : <?php echo $zone ?></p>
+            <p><b>เบอร์โทร</b> : <?php echo $row['number_phone'] ?></p>
+            <p><b>โซน</b> : <?php echo $zone ?></p>
           </div>
         </div>
+        <hr>
+
         <center>
+          <img src="../assets/image/logo_ktb1.webp" width="50px" height="50px">
+          <h5 class="mt-3"><b>ธนาคารกรุงไทย</b> </h5>
+          <p><b>เลขที่บัญชี</b>: 986-4-09952-3</p>
+          <p><b>ชื่อบัญชี</b> : เงินสวัสดิการนักเรียน นักศึกษาวิทยาลัยเทคนิคชัยภูมิ</p>
+          <br>
           <div class="mt-5 col-md-2 ">
             <h4 class="bg-warning text-center rounded-pill p-2">รอการชำระเงิน</h4>
           </div>
+
         </center>
         <form enctype="multipart/form-data" method="post">
           <div class="ms-3 col-md-4 mb-5">

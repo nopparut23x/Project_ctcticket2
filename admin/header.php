@@ -14,7 +14,7 @@
 <nav class="navbar navbar-expand-sm navbar-white bg-primary ">
     <div class="container-fluid">
         <a class="navbar-brand text-white" href="index.php">
-            <img src="../img/logo1.png" width="30" height="30" class="bg-white rounded-circle">
+            <img src="../assets/logo.png" width="30" height="30" class="bg-white rounded-circle">
             ระบบจองบัตรเข้าร่วมงาน
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
@@ -31,7 +31,6 @@
                 <li class="nav-item">
                     <a class="nav-link text-white" href="manager_table.php">จัดการจองโต๊ะ</a>
                 </li>
-
             </ul>
         </div>
     </div>
