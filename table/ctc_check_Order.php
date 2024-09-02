@@ -87,10 +87,6 @@ if (isset($_POST['save'])) {
           <p><b>เลขที่บัญชี</b>: 986-4-09952-3</p>
           <p><b>ชื่อบัญชี</b> : เงินสวัสดิการนักเรียน นักศึกษาวิทยาลัยเทคนิคชัยภูมิ</p>
           <br>
-          <div class="mt-5 col-md-2 ">
-            <h4 class="bg-warning text-center rounded-pill p-2">รอการชำระเงิน</h4>
-          </div>
-
         </center>
         <form enctype="multipart/form-data" method="post">
           <div class="ms-3 col-md-4 mb-5">
@@ -98,8 +94,11 @@ if (isset($_POST['save'])) {
             <input type="file" class="form-control" name="image" required>
           </div>
           <div class="float-end me-4 ">
+
+            <a href="../index.php" class="btn btn-warning"> ชำระเงินภายหลัง</a>
+
             <button name="save" type="submit" class="btn btn-primary">
-              <h6>ยืนยัน</h6>
+              ยืนยัน
             </button>
           </div>
         </form>

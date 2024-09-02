@@ -1,7 +1,7 @@
 <?php
 require_once 'header.php';
 if (empty($_GET['id'])) {
-  header("Location:ctcticket_home.php");
+  header("Location: CTCsit.php");
 }
 $where = array(
   'details_id' => $_GET['id']

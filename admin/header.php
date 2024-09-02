@@ -1,4 +1,8 @@
-<?php require_once '../config/load.php';  ?>
+<?php require_once '../config/load.php';
+if (empty($_SESSION['id'])) {
+    header("location: ../login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +14,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin - Table Verification</title>
     <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="icon" href="../assets/logo.png" type="image/x-icon">
+
 </head>
 <nav class="navbar navbar-expand-sm navbar-white bg-primary ">
     <div class="container-fluid">
@@ -30,6 +36,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="manager_table.php">จัดการจองโต๊ะ</a>
+                </li>
+                <li class="nav-item">
+                    <a onclick="return confirm('คุณต้องการออกจากระบบหรือไม่?')" class="nav-link text-danger" href="logout.php">ออกจากระบบ</a>
                 </li>
             </ul>
         </div>

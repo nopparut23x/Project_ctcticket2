@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Aug 08, 2024 at 08:54 AM
+-- Generation Time: Sep 02, 2024 at 04:01 AM
 -- Server version: 5.7.39
 -- PHP Version: 7.4.33
 
@@ -35,6 +35,7 @@ CREATE TABLE `details` (
   `status_pay` enum('0','1','2') NOT NULL,
   `file` varchar(255) NOT NULL,
   `data_type` enum('shirt','table') NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
   `time_reservation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -48,6 +49,7 @@ CREATE TABLE `order_shirt_items` (
   `order_id` int(11) NOT NULL,
   `details_id` int(11) NOT NULL,
   `size` varchar(255) NOT NULL,
+  `shirt_color` enum('b','w') NOT NULL,
   `amount` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -296,6 +298,29 @@ INSERT INTO `table_re` (`table_id`, `zone_id`, `table_number`, `table_status`) V
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` int(11) NOT NULL,
+  `firstname` varchar(100) NOT NULL,
+  `lastname` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `phone` varchar(10) NOT NULL,
+  `time_registert` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `firstname`, `lastname`, `email`, `password`, `phone`, `time_registert`) VALUES
+(1, 'admin', 'admin', 'admin@gmail.com', '202cb962ac59075b964b07152d234b70', '', '2024-08-27 03:43:30');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `zone_table`
 --
 
@@ -346,6 +371,12 @@ ALTER TABLE `table_re`
   ADD PRIMARY KEY (`table_id`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`);
+
+--
 -- Indexes for table `zone_table`
 --
 ALTER TABLE `zone_table`
@@ -359,25 +390,31 @@ ALTER TABLE `zone_table`
 -- AUTO_INCREMENT for table `details`
 --
 ALTER TABLE `details`
-  MODIFY `details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `details_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `order_shirt_items`
 --
 ALTER TABLE `order_shirt_items`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `order_table_items`
 --
 ALTER TABLE `order_table_items`
-  MODIFY `reservation_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `reservation_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- AUTO_INCREMENT for table `table_re`
 --
 ALTER TABLE `table_re`
   MODIFY `table_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=276;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `zone_table`

@@ -1,8 +1,7 @@
 <?php
 require_once 'header.php';
-
 $where_table = array(
-    'data_type' => 'table'
+    'data_type' => 'table',
 );
 $reservations = $db->selectwhere('details', $where_table);
 
@@ -32,7 +31,10 @@ if (isset($_GET['action'])) {
         redirect("manager_table.php");
     } elseif ($action == 'confirm' && $id) {
         $where_update = array('details_id' => $id);
-        $fields = array('status_pay' => 2);
+        $fields = array(
+            'status_pay' => 2,
+            'user_id' => $_SESSION['id']
+        );
         $update = $db->update('details', $fields, $where_update);
         if ($update) {
             alert('ตรวจสอบการจองเรียบร้อย');
@@ -57,6 +59,7 @@ if (isset($_GET['action'])) {
                         <th>เวลา</th>
                         <th>สถานะการชำระเงิน</th>
                         <th>การกระทำ</th>
+                        <th>ผู้ตรวจสอบ</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,6 +69,17 @@ if (isset($_GET['action'])) {
                             // Fetch related table and zone details
                             $where_reservation = array('details_id' => $reservation['details_id']);
                             $order_table_items = $db->selectwhere('order_table_items', $where_reservation);
+
+                            $user_admin = "";
+                            //Fetch user administration
+                            if (isset($reservation['user_id'])) {
+                                $where_user = array('user_id' => $reservation['user_id']);
+                                $user = $db->selectwhere('users', $where_user);
+                                foreach ($user as $u) {
+                                    $user_admin = $u['firstname'] . " " . $u['lastname'];
+                                }
+                            }
+
 
                             $tables = [];
                             $zones = "";
@@ -112,6 +126,16 @@ if (isset($_GET['action'])) {
                                     <?php endif; ?>
                                     <a onclick="return confirm('คุณต้องการยกเลิกการจองหรือไม่?')" href="?action=delete&id=<?php echo urlencode($reservation['details_id']); ?>" class="btn btn-danger btn-sm m-2">ยกเลิก</a>
                                 </td>
+                                <td>
+                                    <?php
+                                    if (!empty($user_admin)) { ?>
+                                        <b><?php echo htmlspecialchars($user_admin); ?></b>
+                                    <?php
+                                    } else {
+                                        echo "<b class='text-danger'>ยังไม่มีผู้ตรวจสอบ</b>";
+                                    }
+                                    ?>
+                                </td>
                             </tr>
 
                             <!-- Modal for proof -->
@@ -123,7 +147,7 @@ if (isset($_GET['action'])) {
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <img src="../<?php echo htmlspecialchars($reservation['file']); ?>" class="img-fluid" alt="Proof Image">
+                                            <img src="../<?php echo htmlspecialchars($reservation['file']); ?>" class="img-fluid" alt="ไม่มีหลักฐาน">
                                         </div>
                                         <div class="modal-footer">
                                             <a href="?id=<?php echo urlencode($reservation['details_id']); ?>&action=confirm" class="btn btn-success">ยืนยันการตรวจสอบ</a>

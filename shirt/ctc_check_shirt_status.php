@@ -16,8 +16,10 @@ $shirt_select = $db->selectwhere('order_shirt_items', $where_shirt);
 
 // Create an array to hold size and amount information
 $shirtInfo = array();
+$shirt_color = array();
 foreach ($shirt_select as $row_shirt) {
   $shirtInfo[] = $row_shirt['size'] . ' (' . ' จำนวน ' . $row_shirt['amount'] . ')';
+  $shirt_color[] = $row_shirt['shirt_color'];
 }
 
 
@@ -39,26 +41,32 @@ foreach ($shirt_select as $row_shirt) {
       <div class="card-body">
         <div class="d-inline-flex">
           <div class="mt-2 ms-1">
-            <p>หมายเลขการสั่งซื้อ : 00<?php echo $row['details_id'] ?></p>
-            <p>ชื่อผู้จอง : <?php echo $row['full_name'] ?></p>
+            <p><b>หมายเลขการสั่งซื้อ :</b> 00<?php echo $row['details_id'] ?></p>
+            <p><b>ชื่อผู้จอง :</b> <?php echo $row['full_name'] ?></p>
 
-            <p>เสื้อ size : <?php echo implode(' , ', $shirtInfo) ?>
+            <p><b>เสื้อ size : </b><?php echo implode(' , ', $shirtInfo) ?>
             </p>
-            <p>ราคารวม : <?php echo $row['price'] . ' บาท ' ?></p>
+            <p><b>สี color</b> :
+              <?php $color = implode(' , ', $shirt_color);
+              echo ($color == 'w') ? 'สีขาว' : 'สีน้ำเงิน'; ?>
+            </p>
+            <p><b>ราคารวม :</b> <?php echo $row['price'] . ' บาท ' ?></p>
           </div>
           <div class="mt-5 ms-1">
-            <p>เบอร์โทร : <?php echo $row['number_phone'] ?></p>
+            <p><b>เบอร์โทร :</b> <?php echo $row['number_phone'] ?></p>
           </div>
         </div>
         <center>
           <div class="mt-5 col-md-2 ">
-            <h4 class="bg-secondary text-center rounded-pill p-2">รอตรวจสอบการชำระเงิน</h4>
+
           </div>
         </center>
         <div class="float-end me-4 ">
-
+          <a href="../index.php" class="btn btn-success">
+            กลับหน้าหลัก
+          </a>
           <a href="shirt_order.php" class="btn btn-primary">
-            <h6>ส่ังซื้อเพิ่มเติม</h6>
+            ส่ังซื้อเพิ่มเติม
           </a>
         </div>
 

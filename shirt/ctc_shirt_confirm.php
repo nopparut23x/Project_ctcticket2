@@ -16,8 +16,10 @@ $shirt_select = $db->selectwhere('order_shirt_items', $where_shirt);
 
 // Create an array to hold size and amount information
 $shirtInfo = array();
+$shirt_color = array();
 foreach ($shirt_select as $row_shirt) {
   $shirtInfo[] = $row_shirt['size'] . ' (' . $row_shirt['amount'] . ' ตัว ' . ')';
+  $shirt_color[] = $row_shirt['shirt_color'];
 }
 
 if (isset($_POST['save'])) {
@@ -57,6 +59,9 @@ if (isset($_POST['save'])) {
             <p><b>ชื่อผู้จอง</b> : <?php echo $row['full_name'] ?></p>
 
             <p><b>เสื้อ size</b> : <?php echo implode(' , ', $shirtInfo) ?>
+            <p><b>สี color</b> :
+              <?php $color = implode(' , ', $shirt_color);
+              echo ($color == 'w') ? 'สีขาว' : 'สีน้ำเงิน'; ?>
             </p>
             <p><b>ราคารวม</b> : <?php echo $row['price'] . ' บาท ' ?></p>
           </div>
@@ -70,9 +75,6 @@ if (isset($_POST['save'])) {
           <p><b>เลขที่บัญชี</b>: 986-4-09952-3</p>
           <p><b>ชื่อบัญชี</b> : เงินสวัสดิการนักเรียน นักศึกษาวิทยาลัยเทคนิคชัยภูมิ</p>
           <br>
-          <div class="mt-5 col-md-2 ">
-            <h4 class="bg-warning text-center rounded-pill p-2">รอตรวจสอบ</h4>
-          </div>
         </center>
         <form action="" method="post" enctype="multipart/form-data">
 
@@ -81,8 +83,9 @@ if (isset($_POST['save'])) {
             <input type="file" class="form-control" name="image" required>
           </div>
           <div class="float-end me-4 ">
+            <a href="shirt_order.php" class="btn btn-warning">ชำระเงินภายหลัง</a>
             <button name="save" type="submit" class="btn btn-primary">
-              <h6>ยืนยัน</h6>
+              ยืนยัน
             </button>
           </div>
         </form>

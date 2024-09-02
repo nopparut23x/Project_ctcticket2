@@ -25,7 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $fields = array(
                 'details_id' => $insertId,
                 'size' => $item['size'],
-                'amount' => $item['quantity']
+                'shirt_color' => $_POST['shirt_radio'],
+                'amount' => $item['quantity'],
             );
             $insertItem = $db->insert('order_shirt_items', $fields);
         }
@@ -123,7 +124,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="container mt-5">
         <div class="d-flex justify-content-center mb-4">
-            <img src="../assets/shirt68year.png" class="img-fluid" alt="Shirt Image">
+            <div id="carouselExample" class="carousel slide w-50">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="../assets/image/shirt_blue.png" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../assets/image/shirt_w.png" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
         </div>
         <form action="" method="POST" onsubmit="return validateAndSubmitOrderData()">
             <div class="form-section mx-auto col-md-8">
@@ -132,32 +150,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="size-item">
                             <input type="checkbox" class="form-check-input" id="sizeSS">
                             <label class="form-check-label me-2" for="sizeSS">SS</label>
-                            <input type="number" class="form-control" placeholder="จำนวน" min="0" aria-label="SS" id="qtySS">
+                            <input type="number" class="form-control" placeholder="0" min="0" aria-label="SS" id="qtySS">
                         </div>
                         <div class="size-item">
                             <input type="checkbox" class="form-check-input" id="sizeS">
                             <label class="form-check-label me-2" for="sizeS">S</label>
-                            <input type="number" class="form-control" placeholder="จำนวน" min="0" aria-label="S" id="qtyS">
+                            <input type="number" class="form-control" placeholder="0" min="0" aria-label="S" id="qtyS">
                         </div>
                         <div class="size-item">
                             <input type="checkbox" class="form-check-input" id="sizeM">
                             <label class="form-check-label me-2" for="sizeM">M</label>
-                            <input type="number" class="form-control" placeholder="จำนวน" min="0" aria-label="M" id="qtyM">
+                            <input type="number" class="form-control" placeholder="0" min="0" aria-label="M" id="qtyM">
                         </div>
                         <div class="size-item">
                             <input type="checkbox" class="form-check-input" id="sizeL">
                             <label class="form-check-label me-2" for="sizeL">L</label>
-                            <input type="number" class="form-control" placeholder="จำนวน" min="0" aria-label="L" id="qtyL">
+                            <input type="number" class="form-control" placeholder="0" min="0" aria-label="L" id="qtyL">
                         </div>
                         <div class="size-item">
                             <input type="checkbox" class="form-check-input" id="sizeXL">
                             <label class="form-check-label me-2" for="sizeXL">XL</label>
-                            <input type="number" class="form-control" placeholder="จำนวน" min="0" aria-label="XL" id="qtyXL">
+                            <input type="number" class="form-control" placeholder="0" min="0" aria-label="XL" id="qtyXL">
                         </div>
                         <div class="size-item">
                             <input type="checkbox" class="form-check-input" id="size2L">
                             <label class="form-check-label me-2" for="size2L">2L</label>
-                            <input type="number" class="form-control" placeholder="จำนวน" min="0" aria-label="2L" id="qty2L">
+                            <input type="number" class="form-control" placeholder="0" min="0" aria-label="2L" id="qty2L">
                         </div>
                     </div>
                 </div>
@@ -183,6 +201,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
+                                    <div class="alert alert-warning" role="alert">
+                                        ชื่อ-นามสกุลจริง เท่านั้น <br>
+                                        ห้ามใช้นามแฝง เพื่อใช้ในการตรวจสอบข้อมูล
+                                    </div>
+                                    <div class="row m-4">
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <center>
+                                                        <img src="../assets/image/shirt_blue.png" class="w-100">
+                                                        <div class="shirt_color">
+                                                            <input type="radio" class="form-check-input" name="shirt_radio" id="shirt_radio1" value="b" required>
+                                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                                สีนำ้เงิน
+                                                            </label>
+                                                        </div>
+                                                    </center>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <center>
+
+                                                        <img src="../assets/image/shirt_w.png" class="w-100">
+                                                        <div class="shirt_color">
+                                                            <input type="radio" class="form-check-input" name="shirt_radio" id="shirt_radio2" value="w" required>
+                                                            <label class="form-check-label" for="flexRadioDefault2">
+                                                                สีขาว
+                                                            </label>
+                                                        </div>
+                                                    </center>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <input class="form-control" type="text" name="full_name" required placeholder="ชื่อ-นามสกุล">
                                     <br>
                                     <input class="form-control" type="text" name="number_phone" required placeholder="เบอร์โทรศัพท์">

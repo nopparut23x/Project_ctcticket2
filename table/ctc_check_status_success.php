@@ -66,22 +66,28 @@ $currentDateTime = date('d/m/Y H:i');
 </head>
 
 <body>
-  <p class="mt-5 ms-5">โปรดกรอกข้อมูลผู้จอง โดยค้นหาจากชื่อ หรือรหัสการจองบัตร เเละเบอร์โทรศัพท์ก็ได้</p>
-  <div class="card ms-5 me-5">
+
+  <div class="card ms-5 mt-2 me-5">
     <div class="card-body">
       <center>
         <!-- ฟอร์มค้นหา -->
         <form method="post">
+          <div class="alert alert-primary  mt-2 w-75" role="alert">
+            โปรดกรอกข้อมูลผู้จอง โดยค้นหาจากชื่อ หรือรหัสการจองบัตร เเละเบอร์โทรศัพท์ก็ได้
+          </div>
           <div class="input-group">
-            <input class="form-control me-2" type="search" placeholder="Search" name="search">
-            <button class="btn btn-primary" type="submit" style="border-radius:24%">ค้นหา</button>
+            <input class="form-control " type="search" placeholder="Search" name="search">
+            <button class="btn btn-primary" type="submit">ค้นหา</button>
           </div>
         </form>
       </center>
     </div>
   </div>
-  <p class="mt-4 ms-4">โปรดตรวจสอบข้อมูลก่อนยืนยันการชำระเงิน</p>
-
+  <center>
+    <div class="alert alert-warning mt-5 w-75 " role="alert">
+      โปรดตรวจสอบข้อมูลก่อนยืนยันการชำระเงิน
+    </div>
+  </center>
   <?php if (!empty($reservation_data)) : ?>
     <?php foreach ($reservation_data as $data) :
       if ($data['data_type'] == 'table') : ?>
@@ -90,7 +96,7 @@ $currentDateTime = date('d/m/Y H:i');
             <div class="card-body">
               <!-- Display the current date and time -->
               <div class="text-start">
-                <p>เวลา : <?php echo $currentDateTime; ?></p>
+                <p class="text-muted small"><?php echo  $currentDateTime; ?></p>
               </div>
               <div class="d-inline-flex">
                 <div class="mt-2 ms-1">
@@ -108,12 +114,18 @@ $currentDateTime = date('d/m/Y H:i');
                 <div class="mt-5 col-md-2">
                   <?php
                   if ($data['status_pay'] == 0) {
-                    echo '<h4 class="bg-secondary text-center rounded-pill p-2">ยังไม่ได้ชำระเงิน</h4>';
+                    echo '<div class="alert alert-warning" role="alert">
+                    ยังไม่ได้ชำระเงิน
+                    </div>';
                   } elseif ($data['status_pay'] == 1) {
-                    echo '<h4 class="bg-primary text-center rounded-pill p-2">รอตรวจสอบ</h4>';
+                    echo '<div class="alert alert-info" role="alert">
+                    รอการตรวจสอบ
+                    </div>';
                     echo '<button class="btn btn-link" onclick="showEvidenceModal(\'' . '../' . $data['file'] . '\')">หลักฐานการชำระเงิน</button>';
                   } elseif ($data['status_pay'] == 2) {
-                    echo '<h4 class="bg-success text-center rounded-pill p-2">ชำระเงินสำเร็จ</h4>';
+                    echo '<div class="alert alert-success" role="alert">
+                    ชำระเงินเรียบร้อย
+                    </div>';
                     // ปุ่มดาวน์โหลดรายละเอียด
                     echo '<a class="btn btn-success mt-3" href="print_table.php?id=' . $data['details_id'] . '">
             <h6>ดาวน์โหลดรายละเอียด</h6>

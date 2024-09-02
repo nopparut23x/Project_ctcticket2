@@ -61,12 +61,13 @@ foreach ($reservation_select as $row_reservation) {
           </div>
         </div>
         <center>
-          <div class="mt-5 col-md-2 ">
-            <h4 class="bg-primary text-center rounded-pill p-2">รอตรวจสอบ</h4>
-          </div>
+
           <div class="mt-5 ">
+            <a class="btn btn-success" href="../index.php">
+              กลับหน้าหลัก
+            </a>
             <a class="btn btn-primary" href="CTCsit.php">
-              <h6>จองที่นั่งเพิ่ม</h6>
+              จองที่นั่งเพิ่ม
             </a>
           </div>
         </center>

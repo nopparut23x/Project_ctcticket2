@@ -4,7 +4,7 @@ require_once 'header.php';
 // Check if 'id' is set in the query string
 if (empty($_GET['id'])) {
     // Redirect to a default page or display an error
-    header("Location: ctcticket_home.php");
+    header("Location: CTCsit.php");
     exit(); // Ensure no further code is executed
 }
 
@@ -81,6 +81,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['check'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CTC 86 Years</title>
     <link rel="stylesheet" href="css/bootstrap.css">
+    <style>
+        .card {
+            background-color: #c2f1ff;
+        }
+    </style>
     <script>
         function validateSelection() {
             const checkboxes = document.querySelectorAll('input[name="check[]"]');
@@ -125,8 +130,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['check'])) {
         <div class="container mt-5">
             <div class="row">
                 <?php foreach ($select as $row_table) { ?>
-                    <div class="col-md-4">
-                        <div class="card mb-3">
+                    <div class="col-md-2 ">
+                        <div class="card mb-2 ">
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <div>
                                     <p>โต๊ะที่: <?php echo $row_table['table_number'] ?></p>
@@ -150,6 +155,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['check'])) {
 
         <!-- Button trigger modal -->
         <div class="text-center">
+            <a href="CTCsit.php" class="btn btn-secondary">เลือกโซน</a>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 ยืนยัน
             </button>
@@ -165,6 +171,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['check'])) {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        <div class="alert alert-warning" role="alert">
+                            ชื่อ-นามสกุลจริง เท่านั้น <br>
+                            ห้ามใช้นามแฝง เพื่อใช้ในการตรวจสอบข้อมูล
+
+                        </div>
+
                         <input class="form-control" type="text" name="full_name" required placeholder="ชื่อ-นามสกุล">
                         <br>
                         <input class="form-control" type="text" name="number_phone" required placeholder="เบอร์โทรศัพท์">
